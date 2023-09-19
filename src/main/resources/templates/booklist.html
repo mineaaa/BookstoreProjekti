@@ -23,8 +23,10 @@
             <td th:text="${book.getYear()}">Year</td>
             <td th:text="${book.getIsbn()}">ISBN</td>
             <td th:text="${book.getPrice()}">Price</td>
+            <td> <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
         </tr>
     </table>
+    <a href="/addbook" class="btn btn-primary">Add Book</a>
 
 </body>
 
