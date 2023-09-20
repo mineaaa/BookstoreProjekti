@@ -52,7 +52,6 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-    // muokkaa!!!!
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id));
