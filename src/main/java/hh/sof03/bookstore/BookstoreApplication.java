@@ -28,6 +28,9 @@ public class BookstoreApplication {
 			log.info("kirjojen tallettaminen");
 			bookStoreRepository.save(new Book("Minni Hiiri", "Minni Hiiren seikkailut", 2023, "hiiri123", 13.99));
 			bookStoreRepository.save(new Book("Mikki Hiiri", "Hiiren elämä", 2022, "hiiri234", 10.50));
+			// for (Book book : bookStoreRepository.findAll()) {
+			// log.info(book.toString());
+			// }
 
 		};
 	}

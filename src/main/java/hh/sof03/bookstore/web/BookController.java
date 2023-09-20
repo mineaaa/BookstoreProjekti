@@ -3,6 +3,7 @@ package hh.sof03.bookstore.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +40,7 @@ public class BookController {
         return "redirect:../booklist";
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         return "addbook";
@@ -47,6 +48,19 @@ public class BookController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book) {
+        bookRepository.save(book);
+        return "redirect:/booklist";
+    }
+
+    // muokkaa!!!!
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("book", bookRepository.findById(id));
+        return "editbook";
+    }
+
+    @RequestMapping(value = "saveedit/{id}", method = RequestMethod.POST)
+    public String editBookSubmit(@PathVariable("id") Long id, @ModelAttribute Book book) {
         bookRepository.save(book);
         return "redirect:/booklist";
     }
