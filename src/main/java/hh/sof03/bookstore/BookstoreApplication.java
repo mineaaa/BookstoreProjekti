@@ -24,32 +24,26 @@ public class BookstoreApplication {
 
 	@Bean
 
-	public CommandLineRunner bookStore(BookRepository bookStoreRepository) {
+	public CommandLineRunner bookStore(BookRepository bookStoreRepository, CategoryRepository categoryRepository) {
 		return (args) -> {
 
+			Category c1 = new Category("Komedia");
+			categoryRepository.save(c1);
+			Category c2 = new Category("Seikkailu");
+			categoryRepository.save(c2);
+
 			log.info("kirjojen tallettaminen");
-			bookStoreRepository.save(new Book("Minni Hiiri", "Minni Hiiren seikkailut", 2023, "hiiri123", 13.99));
-			bookStoreRepository.save(new Book("Mikki Hiiri", "Hiiren elämä", 2022, "hiiri234", 10.50));
+			bookStoreRepository.save(new Book("Minni Hiiri", "Minni Hiiren seikkailut", 2023, "hiiri123", 13.99, c1));
+			bookStoreRepository.save(new Book("Mikki Hiiri", "Hiiren elämä", 2022, "hiiri234", 10.50, c2));
 
 			for (Book book : bookStoreRepository.findAll()) {
 				log.info(book.toString());
 			}
 
-		};
-	}
-
-	@Bean
-
-	public CommandLineRunner categoryBookStore(CategoryRepository categoryRepository) {
-		return (args) -> {
-
-			log.info("kategorioiden tallettaminen");
-			categoryRepository.save(new Category("Elämänkerta"));
-			categoryRepository.save(new Category("Komedia"));
-
 			for (Category category : categoryRepository.findAll()) {
 				log.info(category.toString());
 			}
+
 		};
 	}
 

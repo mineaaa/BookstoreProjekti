@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 
@@ -21,20 +23,26 @@ public class Book {
     private String isbn;
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
+
     public Book() {
         this.author = null;
         this.title = null;
         this.year = 0;
         this.isbn = null;
         this.price = 0;
+        this.category = null;
     }
 
-    public Book(String author, String title, int year, String isbn, double price) {
+    public Book(String author, String title, int year, String isbn, double price, Category category) {
         this.author = author;
         this.title = title;
         this.year = year;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
     public String getAuthor() {
@@ -77,18 +85,32 @@ public class Book {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Book [author=" + author + ", title=" + title + ", year=" + year + ", isbn=" + isbn + ", price=" + price
-                + "]";
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        if (this.category != null) {
+            return "Book [author=" + author + ", title=" + title + ", year=" + year + ", isbn=" + isbn + ", price="
+                    + price + "category=" + category + "]";
+        } else {
+            return "Book [author=" + author + ", title=" + title + ", year=" + year + ", isbn=" + isbn + ", price="
+                    + price + "]";
+        }
+
     }
 
 }
