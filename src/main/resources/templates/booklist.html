@@ -18,6 +18,8 @@
             <th> ISBN</th>
             <th>Price</th>
             <th>Category</th>
+            <th></th>
+            <th></th>
         </tr>
 
         <tr th:each="book : ${books}">
@@ -32,6 +34,7 @@
         </tr>
     </table>
     <a href="/add" class="btn btn-success">Add Book</a>
+    <a href="/categorylist" class="btn btn-success">Go to categories</a>
 </body>
 
 </html>
