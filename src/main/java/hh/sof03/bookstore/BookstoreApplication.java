@@ -9,6 +9,8 @@ import hh.sof03.bookstore.domain.Book;
 import hh.sof03.bookstore.domain.BookRepository;
 import hh.sof03.bookstore.domain.Category;
 import hh.sof03.bookstore.domain.CategoryRepository;
+import hh.sof03.bookstore.domain.User;
+import hh.sof03.bookstore.domain.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,8 @@ public class BookstoreApplication {
 
 	@Bean
 
-	public CommandLineRunner bookStore(BookRepository bookStoreRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookStore(BookRepository bookStoreRepository, CategoryRepository categoryRepository,
+			UserRepository userepository) {
 		return (args) -> {
 
 			Category c1 = new Category("Komedia");
@@ -43,7 +46,13 @@ public class BookstoreApplication {
 			for (Category category : categoryRepository.findAll()) {
 				log.info(category.toString());
 			}
-
+			// käyttäjien luonti minea/minea ja admin/admin
+			User user1 = new User("minea", "$2a$10$buuyprkNQrPlVZkvxbQSPOniEs/r9Yo8jIIyyUKzdIgEM7xrI71Te",
+					"minea@haagahelia.fi", "USER");
+			User user2 = new User("admin", "$2a$10$rYqlcWF7dRlMoqWYe5UXe.GBEOReOdU4.6nkeVeUE8LOCghxdwf7q",
+					"admin@haagahelia.fi", "ADMIN");
+			userepository.save(user1);
+			userepository.save(user2);
 		};
 	}
 

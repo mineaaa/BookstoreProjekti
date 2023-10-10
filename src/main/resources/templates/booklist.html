@@ -10,6 +10,10 @@
 
 <body>
     <h1>Books</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+    <h2>Hello <span sec:authentication="name"></span>!</h2>
     <table class="table table-striped">
         <tr>
             <th>Author</th>
@@ -29,7 +33,9 @@
             <td th:text="${book.getIsbn()}">ISBN</td>
             <td th:text="${book.getPrice()}">Price</td>
             <td th:text="${book.getCategory()}">Category</td>
-            <td> <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+            </td>
             <td> <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning">Edit Book</a> </td>
         </tr>
     </table>
