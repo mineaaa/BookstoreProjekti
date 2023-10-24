@@ -81,7 +81,7 @@ public class BookstoreRepositoryTest {
 
     }
 
-    @Test
+    @Test // testataan kategorian etsimistä nimellä
     public void findByNameCategory() {
         List<Category> categories = categoryRepository.findByName("Komedia");
         assertThat(categories).hasSize(1);
@@ -93,7 +93,7 @@ public class BookstoreRepositoryTest {
         assertThat(userRepository.findAll());
     }
 
-    @Test
+    @Test // testataan käyttäjänimellä löytämistä
     public void findByNameUser() {
         List<User> users = userRepository.findByUsername("minea");
         assertThat(users).hasSize(1);
@@ -101,7 +101,7 @@ public class BookstoreRepositoryTest {
 
     }
 
-    @Test
+    @Test // testataan uuden käyttäjän luomista
     public void saveNewUser() {
         User u3 = new User("user", "$2a$10$1a8KO6xK3eoYcnGHZ4UHLOYfKr3.sHbtBzpXZdgL8skDCHYnSkl8W", "user@haagahelia.fi",
                 "USER");
@@ -109,7 +109,7 @@ public class BookstoreRepositoryTest {
         assertThat(u3.getId()).isNotNull();
     }
 
-    @Test // testataan kategorian poistamista id:llä
+    @Test // testataan käyttäjän poistamista id:llä
     public void deleteUserbyId() {
         List<User> users = (List<User>) userRepository.findAll();
         userRepository.deleteById((long) 1);
